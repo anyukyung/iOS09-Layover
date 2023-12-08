@@ -36,6 +36,7 @@ export class BoardController {
     @CustomHeader(new JwtValidationPipe()) payload: tokenPayload,
     @Body() createBoardDto: CreateBoardDto,
   ) {
+    this.logger.log(`[createBoard] memberId: ${payload.memberId}`);
     const savedBoard: CreateBoardResDto = await this.boardService.createBoard(payload.memberId, createBoardDto);
     throw new CustomResponse(ECustomCode.SUCCESS, savedBoard);
   }
